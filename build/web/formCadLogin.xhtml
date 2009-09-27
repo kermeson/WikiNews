@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="./template.xhtml">
+
+    <ui:define name="titulo">
+        Cadastra Usuário
+    </ui:define>
+
+    <ui:define name="conteudo">
+        <form jsfc="h:form" id="formcadlogin">
+            <p jsfc="h:message" for="formcadlogin"></p>
+            <div>
+                <fieldset>
+                    <legend>Cadastra Usuário</legend>
+                    <label jsfc="h:outputLabel" for="nome">Nome: </label>
+                    <input jsfc="h:inputText" type="text" id="nome" value="#{usuarioC.usuario.nome}" styleClass="field" required="true" />
+                    <span jsfc="h:message" for="nome"></span><br />
+                    
+                    <label jsfc="h:outputLabel" for="endereco">Endereço: </label>
+                    <input jsfc="h:inputText" type="text" id="endereco" value="#{usuarioC.usuario.endereco}" styleClass="field" required="true" />
+                    <span jsfc="h:message" for="endereco"></span><br />
+
+                    <label jsfc="h:outputLabel" for="email">Email: </label>
+                    <input jsfc="h:inputText" type="text" id="email" value="#{usuarioC.usuario.email}" styleClass="field" required="true" />
+                    <span jsfc="h:message" for="email"></span><br />
+
+                    <label jsfc="h:outputLabel" for="password">Senha: </label>
+                    <input jsfc="h:inputSecret" type="text" id="password" value="#{usuarioC.usuario.senha}" styleClass="field" required="true" />
+                    <span jsfc="h:message" for="password"></span><br />
+
+                    <input type="submit" jsfc="h:commandButton" action="#{usuarioC.cadastrar}" value="Salvar" title="Salvar" />
+                    <input type="reset" value="Limpar" />
+                </fieldset>
+            </div>
+        </form>
+
+    </ui:define>
+</ui:composition>

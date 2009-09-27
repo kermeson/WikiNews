@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="./template.xhtml">
+
+    <ui:define name="titulo">
+        Login
+    </ui:define>
+
+    <ui:define name="conteudo">
+        <form jsfc="h:form" id="formlogin">
+            <p jsfc="h:message" for="formlogin"></p>
+            <div>
+                <fieldset>
+                    <legend>Login</legend>
+                    <label jsfc="h:outputLabel" for="email">Email: </label>
+                    <input jsfc="h:inputText" type="text" id="email" value="#{usuarioC.usuario.email}" styleClass="field" required="true" />
+                    <span jsfc="h:message" for="email"></span><br />
+
+                    <label jsfc="h:outputLabel" for="password">Senha: </label>
+                    <input jsfc="h:inputSecret" type="text" id="password" value="#{usuarioC.usuario.senha}" styleClass="field" required="true" />
+                    <span jsfc="h:message" for="password"></span><br />
+
+                    <input type="submit" jsfc="h:commandButton" action="#{usuarioC.login}" value="Enviar" title="Enviar" />
+                    <input type="reset" value="Limpar" />
+                </fieldset>
+            </div>
+        </form>
+
+    </ui:define>
+</ui:composition>

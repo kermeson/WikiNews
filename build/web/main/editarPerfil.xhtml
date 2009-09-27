@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+                template="./templatemain.xhtml">
+    
+    <ui:define name="titulo">
+        <h:outputText value="#{postnewC.postNew.titulo}" />
+    </ui:define>
+
+    <ui:define name="conteudo">
+        <form jsfc="h:form" id="formusuario" >
+            <div>                
+                    <h3>Editar Perfil</h3>
+                    <rich:messages for="formusuario" />
+                    <label jsfc="h:outputLabel" for="nome">Nome: </label>
+                    <input jsfc="h:inputText" type="text" id="nome" value="#{mainC.usuario.nome}" styleClass="field" required="true" />
+                    <span jsfc="h:message" for="nome"></span><br />
+                    <label jsfc="h:outputLabel" for="texto">Email: </label>
+                    <input jsfc="h:inputText" type="text" id="email"  value="#{mainC.usuario.email}" required="true" styleClass="field" />
+                    <span jsfc="h:message" for="email"></span><br />
+                    <label jsfc="h:outputLabel" for="endereco">Endereço: </label>
+                    <input jsfc="h:inputText" type="text" id="endereco" value="#{mainC.usuario.endereco}" styleClass="field"/>
+                    <span jsfc="h:message" for="endereco"></span><br />
+                    <a4j:commandButton id="botao" value="Salvar" action="#{mainC.salvarPerfil}" />
+            </div>
+        </form>
+    </ui:define>
+
+</ui:composition>

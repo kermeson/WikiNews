@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="./templatemain.xhtml">
+    
+    <ui:define name="titulo">
+        <h:outputText value="#{postnewC.postNew.titulo}" />
+    </ui:define>
+
+    <ui:define name="conteudo">
+        <form jsfc="h:form" id="formpostnew" >
+            <div id="cadastropostnews">
+                <fieldset>
+                    <legend>Editar</legend>
+                    <p jsfc="h:message" for="formpostnew"></p>
+                    <label jsfc="h:outputLabel" for="titulo">
+                        Título
+                    </label>&nbsp;
+                    <input jsfc="h:inputText" type="text" id="titulo" value="#{postnewC.postNew.titulo}" styleClass="field" required="true" />
+                    <span jsfc="h:message" for="titulo"></span><br />
+                    <label jsfc="h:outputLabel" for="texto">
+                        Texto
+                    </label><br />
+                    <textarea jsfc="h:inputTextarea" id="texto" cols="40" value="#{postnewC.postNew.texto}" rows="5" required="true" styleClass="field" ></textarea>
+                    <span jsfc="h:message" for="texto"></span><br />
+                    <input type="submit" jsfc="h:commandButton" action="#{postnewC.salvar}" value="Salvar" />
+                    <input type="reset" value="Limpar" />
+                </fieldset>
+            </div>
+        </form>
+    </ui:define>
+
+</ui:composition>

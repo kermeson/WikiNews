@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                template="./templatemain.xhtml">
+                    
+    
+    <ui:define name="right">
+        right
+    </ui:define>
+
+    <ui:define name="conteudo">
+        <rich:panel id="mainBlock">
+            <rich:messages />
+            <h3 class="titulos">Últimos PostNews</h3>
+            <form jsfc="h:form">
+                <ui:repeat value="#{postnewC.todos}" var="item">
+                    <div class="left_articles">
+                        <h2 class="title">
+                            <h:commandLink action="#{mainC.ver}"  value="#{item.titulo}"><f:setPropertyActionListener value="#{item}"
+                        target="#{mainC.postNew}"/></h:commandLink></h2>
+                        <p class="date"><h:outputText value="publicado em &nbsp; #{item.dataPublicacao}"/><h:outputText value=" por #{item.usuario.nome}"/></p>
+                        <div><h:outputText value="#{item.texto}"/></div>
+                        
+                        <div class="clear"></div>
+                    </div>
+                </ui:repeat>
+            </form>
+        </rich:panel>
+        <!--<rich:panel id="PostNewBlock" rendered="#{mainC.visualizarPostState}">
+            <h3><h:outputText value="#{mainC.postNew.titulo}" /></h3>
+            <div class="texto"><h:outputText value="#{mainC.postNew.texto}" /></div>
+            <form jsfc="h:form">
+                <a4j:commandButton value="Editar" action="#{mainC.mostrarEditar}" immediate="true"/>
+                <a4j:commandButton value="Voltar" action="#{mainC.inicio}" immediate="true"/>
+            </form>
+        </rich:panel>
+        <rich:panel id="EditPostNewBlock" rendered="#{mainC.editarPostState}">
+            <form jsfc="h:form" id="formpostnew" >
+                <div id="cadastropostnews">
+                    <fieldset>
+                        <legend>Editar</legend>
+                        <p jsfc="h:message" for="formpostnew"></p>
+                        <label jsfc="h:outputLabel" for="titulo">
+                            Título
+                        </label>&nbsp;
+                        <input jsfc="h:inputText" type="text" id="titulo" value="#{mainC.postNew.titulo}" styleClass="field" required="true" />
+                        <span jsfc="h:message" for="titulo"></span><br />
+                        <label jsfc="h:outputLabel" for="texto">
+                            Texto
+                        </label><br />
+                        <textarea jsfc="h:inputTextarea" id="texto" cols="40" value="#{mainC.postNew.texto}" rows="5" required="true" styleClass="field" ></textarea>
+                        <span jsfc="h:message" for="texto"></span><br />
+                        <input type="submit" jsfc="h:commandButton" action="#{mainC.editar}" value="Salvar" />
+                        <input type="reset" value="Limpar" />
+                        <a4j:commandButton value="Cancelar" action="#{mainC.ver}" immediate="true"/>
+                    </fieldset>
+                </div>
+            </form>
+        </rich:panel>-->
+    </ui:define>
+
+    <ui:define name="bottom">
+        bottom
+    </ui:define>
+
+    <ui:define name="addUpdateBlock">
+		dgbvc fgdfgs sadfgs
+        <h:outputText value="#{postnewC.currentState}" />
+	</ui:define>
+
+
+</ui:composition>

@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><ui:insert name="titulo"></ui:insert></title>
+        <link href="../css/default.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="content">
+            <div id="top_info">
+                <form jsfc="h:form">
+                    <p><a jsfc="h:commandLink"  title="Sair" action="#{usuarioC.logout}" immediate="true">Sair</a></p>
+                </form>
+            </div>
+
+            <div id="logo">
+                <img src="../images/logo.png" alt="Logo" />
+            </div>
+
+            <div id="barratopo">
+                <form jsfc="h:form">
+                        <ul id="tablist">
+                            <li><a jsfc="h:commandLink"  title="Início" action="#{mainC.inicio}" immediate="true">Início</a></li>
+                            <li><a jsfc="h:commandLink" action="#{postnewC.novoPostNew}"  value="Cadastrar PostNew" immedite="true" /> </li>
+                            <li><a jsfc="h:commandLink" title="Editar perfil" action="#{mainC.editarPerfil}" immediate="true">Editar perfil</a></li>
+
+                        </ul>
+                </form>
+
+
+                <div id="search">
+                    <form method="post" action="?" jsfc="h:form">
+                        <p><input type="text" jsfc="h:inputText" name="search" id="search" class="search" /> <input type="submit" value="Buscar" class="button" /></p>
+                       <rich:suggestionbox id="suggestionBoxId" for="search" suggestionAction="#{postnewC.complemento}"
+                        width="200" height="150" var="result"  frequency="1"    minChars="3"  >
+                            <h:column>
+                                <h:outputText value="#{result}"/>
+                            </h:column>
+                        </rich:suggestionbox>
+                    </form>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div id="left">
+                
+                <ui:insert name="conteudo">
+
+                </ui:insert>
+                
+            </div>
+
+            <div id="right">
+                
+                    <a4j:outputPanel ajaxRendered="true" id="OutputPanel2">
+                        <rich:panel header="Favoritos" id="favoritos">
+                            <form jsfc="h:form">
+                                <rich:dataList var="item"  value="#{mainC.favoritos}" rows="10" type="disc" title="Favoritos">
+                                   <h:commandLink action="#{mainC.ver}"  value="#{item.titulo}"><f:setPropertyActionListener value="#{item}"
+                                   target="#{mainC.postNew}"/></h:commandLink>
+                                </rich:dataList>
+                            </form>
+                        </rich:panel>
+                    </a4j:outputPanel>
+                
+                <div class="right_articles">
+                    <p><img src="images/image.gif" alt="Image" title="Image" class="image" /><b>Lorem ipsum dolor sit amet</b><br />consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam <a href="#">erat volutpat</a>. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis <a href="#">nisl ut aliquip ex</a>.</p>
+                </div>
+                <div class="right_articles">
+                    <p><img src="images/image.gif" alt="Image" title="Image" class="image" /><b>Lorem ipsum dolor sit amet</b><br />consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam <a href="#">erat volutpat</a>. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis <a href="#">nisl ut aliquip ex</a>.</p>
+                </div>
+                <div class="notes">
+                    <p>If you liked this template you might like some other <a href="http://templates.solucija.com/">free CSS templates</a> from <a href="http://www.solucija.com/">Solucija</a>.</p>
+                </div>
+            </div>
+
+            <div id="footer">
+                <p class="right">&copy; 2006 Internet Broadcast, Design: Luka Cvrk - <a href="http://www.solucija.com/" title="Information Architecture and Web Design">Solucija</a></p>
+                <p><a href="#">RSS Feed</a> &middot; <a href="#">Contact</a> &middot; <a href="#">Accessibility</a> &middot; <a href="#">Products</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> and <a href="http://validator.w3.org/check?uri=referer">XHTML</a><br /></p>
+
+            </div>
+        </div>
+    </body>    
+</html>

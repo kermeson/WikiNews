@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                template="./templatemain.xhtml">
+    
+    <ui:define name="titulo">
+        <h:outputText value="#{postnewC.postNew.titulo}" />
+    </ui:define>
+
+    <ui:define name="conteudo">
+        <rich:panel id="mainBlock">
+            <h3><h:outputText value="#{mainC.postNew.titulo}" /></h3>
+            <div class="texto"><h:outputText value="#{mainC.postNew.texto}" /></div>
+            <form jsfc="h:form">
+                <!--<a href="#" jsfc="h:commandLink" action="#{mainC.editar}" title="Editar"><f:param name="id" value="#{mainC.postNew.idPostNew}" />Editar</a>-->
+                <div><a4j:commandLink value="Adicionar Favorito" reRender="favoritos" action="#{mainC.adicionarFavorito}"></a4j:commandLink></div>
+            </form>
+            
+            <h3>Comentários</h3>
+            
+        </rich:panel>
+        <rich:panel id="ComentarioBlock">
+            <a4j:form id="formcomentario" >
+                <h3>Adicionar Comentário</h3>
+                <rich:message for="formcomentario" />
+                <label>Nome:* </label>
+                <input jsfc="h:inputText" type="text" value="#{mainC.comentario.nome}"  id="nome" />
+                <rich:message for="nome" /><br />
+                <label>Email:* </label>
+                <input jsfc="h:inputText" type="text" value="#{mainC.comentario.email}"  id="email" />
+                <rich:message for="email" /><br />
+                <label>Comentário:* </label>
+                <textarea jsfc="h:inputTextarea" rows="5" cols="40" value="#{mainC.comentario.comentario}" 
+                id="comentario"></textarea>
+                <rich:message for="comentario" /><br />
+                <h:commandButton value="Enviar"  action="#{mainC.adicionarComentarioPostNew}" type="submit" />
+            </a4j:form>
+        </rich:panel>
+
+    </ui:define>
+
+</ui:composition>

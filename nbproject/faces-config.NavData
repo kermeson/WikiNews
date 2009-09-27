@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="forward.jsp" x="192" y="61" zoom="false"/>
+        <Node id="main/verPostNew.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="main/editarPostNew.xhtml" x="809" y="417" zoom="true"/>
+        <Node id="main/*" x="436" y="503" zoom="true"/>
+        <Node id="main/index.xhtml" x="615" y="354" zoom="true"/>
+        <Node id="main/formPostNew.xhtml" x="93" y="406" zoom="true"/>
+        <Node id="template.xhtml" x="116" y="127" zoom="true"/>
+        <Node id="*" x="496" y="-3" zoom="true"/>
+        <Node id="formLogin.xhtml" x="304" y="274" zoom="false"/>
+        <Node id="main/editarPerfil.xhtml" x="70" y="304" zoom="true"/>
+        <Node id="formCadLogin.xhtml" x="400" y="150" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>
