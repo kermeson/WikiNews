@@ -142,7 +142,7 @@ public class MainController {
         PostNewDAO dao = new PostNewDAOImp();
         String msg;
         try {
-            System.out.println("passssssssssssssssssssou");
+            getComentario().setIdPostNew(getPostNew().getIdPostNew());
             dao.adicionarComentario(getComentario());
             msg = "O comentário foi adicionado com sucesso";
         } catch (Exception e ){
@@ -150,10 +150,11 @@ public class MainController {
         }
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.addMessage("formusuario", new FacesMessage(msg));
+        facesContext.addMessage("formcomentario", new FacesMessage(msg));
     }
 
-        public List getComentariosPostNew() throws Exception {
+    public List getComentariosPostNew() throws Exception {
+        System.out.println("lista");
         PostNewDAO dao = new PostNewDAOImp();
         return dao.buscarComentariosPostNew(postNew);
     }

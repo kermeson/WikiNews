@@ -21,13 +21,24 @@
                 <div><a4j:commandLink value="Adicionar Favorito" reRender="favoritos" action="#{mainC.adicionarFavorito}"></a4j:commandLink></div>
             </form>
             
-            <h3>Comentários</h3>
+            
             
         </rich:panel>
-        <rich:panel id="ComentarioBlock">
+        <rich:panel id="ListaComentarios" rendered="">
+            <h3 class="titulos">Comentários</h3>
+            <ui:repeat value="#{mainC.comentariosPostNew}" var="item">
+                <div class="comentario">
+                    <div>Autor: <h:outputText value="#{item.nome}"/></div>
+                    <div><h:outputText value="#{item.comentario}"/></div>
+
+                    <div class="clear"></div>
+                </div>
+            </ui:repeat>
+        </rich:panel>
+        <rich:panel id="FormComentario">
             <a4j:form id="formcomentario" >
                 <h3>Adicionar Comentário</h3>
-                <rich:message for="formcomentario" />
+                <div><rich:message for="formcomentario" /></div>
                 <label>Nome:* </label>
                 <input jsfc="h:inputText" type="text" value="#{mainC.comentario.nome}"  id="nome" />
                 <rich:message for="nome" /><br />

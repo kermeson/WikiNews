@@ -176,6 +176,7 @@ public class PostNewDAOImp implements PostNewDAO {
             while (rs.next()) {
                 list.add(new ComentarioPostNew(rs.getInt("idComentario"), rs.getInt("idPostNew"), rs.getString("nome"), rs.getString("email"), rs.getString("comentario")));
             }
+            System.out.print(list.size());
             return list;
         } catch (SQLException sqle) {
             throw new Exception("Erro: " + sqle.getMessage());
