@@ -21,7 +21,7 @@ img { border: 0; }
 #slogan { font-size: 0.9em; margin: 0 0 10px 2px; padding: 0; color: #808080; background: #fff; }
 #top_info { line-height: 27px; float: right; color: #808080; background: #fff; margin: 12px 5px 7px 0; text-align: right; height: 74px; }
 
-/* round blue login button */
+/* round #2220AF login button */
 #loginbutton a { text-decoration: none; width: 24px; padding: 7px 12px; margin: 0 0 0 8px; height: 28px; background: #fff url(../images/lb.gif) no-repeat; color: #000; }
 #loginbutton a:hover{ background: #fff url(../images/lbhover.gif) no-repeat; color: #000;}
 
@@ -102,7 +102,7 @@ form, form p { margin: 0; padding: 0; line-height: 25px; }
 .left_articles .title  a:hover {
     text-decoration: underline;
 }
-.date { font-size: .9em; padding: 0 0 0 12px; background: url(../images/news.gif) no-repeat center left; color: #808080; }
+.date { font-size: 12px; padding: 0 0 0 12px; background: url(../images/news.gif) no-repeat center left; color: #808080; }
 .bigimage {
     float: left;
     clear: left;
@@ -166,3 +166,13 @@ form, form p { margin: 0; padding: 0; line-height: 25px; }
 
 #left .rich-panel {border: 0; }
 #left .rich-panel-body {padding: 0;}
+
+#postnew {margin: 0 0 15px 0;}
+.titulopost {font-size:16px; color:#2220AF; margin: 0 0 7px 0; padding:0; font-family:Georgia;}
+#titcomentar {background: url(../images/icon_comentar.png) 0 50% no-repeat; font-family:Georgia; padding-left: 25px;
+margin:0 0 7px 0; font-size:16px; color:#2220AF;}
+#listacomentarios {margin-bottom:15px;}
+.comentario {border: 1px solid #ccc; background-color:#efefef; padding:7px 8px; margin:0 0 8px 0;}
+#formcomentario label {display:block; padding:0;}
+.input {width:99%; border:1px solid #ccc; padding:2px; margin:0 0 6px 0;}
+.rich-message-label{color:red;}

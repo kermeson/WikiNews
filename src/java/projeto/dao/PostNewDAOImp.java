@@ -45,7 +45,7 @@ public class PostNewDAOImp implements PostNewDAO {
             ps.setInt(1, postnew.getUsuario().getIdUsuario());
             ps.setString(2, postnew.getTitulo());
             ps.setString(3, postnew.getTexto());
-            ps.setDate(4, new java.sql.Date(postnew.getDataPublicacao().getTime()));
+            ps.setTimestamp(4, new java.sql.Timestamp(postnew.getDataPublicacao().getTime()));
             ps.executeUpdate();
         } catch(SQLException sqle) {
             throw new Exception("Erro ao inserir dados: " + sqle.getMessage());
@@ -67,7 +67,7 @@ public class PostNewDAOImp implements PostNewDAO {
             List<PostNew> list = new ArrayList<PostNew>();
             while (rs.next()) {
                 Usuario usuario = new Usuario(rs.getInt("idUsuario"), rs.getString("nome"),rs.getString("endereco"),rs.getString("email"), rs.getString("senha"));
-                list.add(new PostNew(rs.getInt("idPostNew"), usuario, rs.getString("titulo"), rs.getString("texto"), rs.getDate("dataPublicacao")));
+                list.add(new PostNew(rs.getInt("idPostNew"), usuario, rs.getString("titulo"), rs.getString("texto"), rs.getTimestamp("dataPublicacao")));
             }
             return list;
         } catch(SQLException sqle) {

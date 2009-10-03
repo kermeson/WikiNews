@@ -4,6 +4,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
                 xmlns:rich="http://richfaces.ajax4jsf.org/rich"
                 xmlns:a4j="http://richfaces.org/a4j"
                 template="./templatemain.xhtml">
@@ -13,19 +14,18 @@
     </ui:define>
 
     <ui:define name="conteudo">
-        <rich:panel id="mainBlock">
-            <h3><h:outputText value="#{mainC.postNew.titulo}" /></h3>
+        <rich:panel id="postnew">
+            <h3 class="titulopost"><h:outputText value="#{mainC.postNew.titulo}" /></h3>
+            <p class="date"><h:outputText value="publicado em &nbsp; #{mainC.postNew.dataPublicacao}"/><h:outputText value=" por #{mainC.postNew.usuario.nome}"/></p>
             <div class="texto"><h:outputText value="#{mainC.postNew.texto}" /></div>
             <form jsfc="h:form">
                 <!--<a href="#" jsfc="h:commandLink" action="#{mainC.editar}" title="Editar"><f:param name="id" value="#{mainC.postNew.idPostNew}" />Editar</a>-->
                 <div><a4j:commandLink value="Adicionar Favorito" reRender="favoritos" action="#{mainC.adicionarFavorito}"></a4j:commandLink></div>
-            </form>
-            
-            
-            
+            </form>           
         </rich:panel>
-        <rich:panel id="ListaComentarios" rendered="">
-            <h3 class="titulos">Comentários</h3>
+        <rich:panel id="listacomentarios" rendered="#{not empty mainC.comentariosPostNew}">
+            <h3 class="titulopost">Comentários</h3>
+            <p><h:outputText value="Este post recebeu #{fn:length(mainC.comentariosPostNew)} comentários" /></p>
             <ui:repeat value="#{mainC.comentariosPostNew}" var="item">
                 <div class="comentario">
                     <div>Autor: <h:outputText value="#{item.nome}"/></div>
@@ -37,19 +37,22 @@
         </rich:panel>
         <rich:panel id="FormComentario">
             <a4j:form id="formcomentario" >
-                <h3>Adicionar Comentário</h3>
+                <h3 id="titcomentar">Adicionar Comentário</h3>
                 <div><rich:message for="formcomentario" /></div>
                 <label>Nome:* </label>
-                <input jsfc="h:inputText" type="text" value="#{mainC.comentario.nome}"  id="nome" />
+                <input jsfc="h:inputText" class="input" type="text" value="#{mainC.comentario.nome}" 
+                       required="true" id="nome" requiredMessage="O campo 'Nome' deve ser preenchido." />
                 <rich:message for="nome" /><br />
                 <label>Email:* </label>
-                <input jsfc="h:inputText" type="text" value="#{mainC.comentario.email}"  id="email" />
+                <input jsfc="h:inputText" type="text" class="input" value="#{mainC.comentario.email}" 
+                       required="true" id="email" requiredMessage="O campo 'Email' deve ser preenchido." />
                 <rich:message for="email" /><br />
                 <label>Comentário:* </label>
-                <textarea jsfc="h:inputTextarea" rows="5" cols="40" value="#{mainC.comentario.comentario}" 
-                id="comentario"></textarea>
+                <textarea jsfc="h:inputTextarea" class="input" rows="5" cols="40" 
+                          value="#{mainC.comentario.comentario}" required="true" id="comentario"
+                          requiredMessage="O campo 'Comentário' deve ser preenchido."></textarea>
                 <rich:message for="comentario" /><br />
-                <h:commandButton value="Enviar"  action="#{mainC.adicionarComentarioPostNew}" type="submit" />
+                <h:commandButton value="Enviar"   action="#{mainC.adicionarComentarioPostNew}" type="submit" />
             </a4j:form>
         </rich:panel>
 
