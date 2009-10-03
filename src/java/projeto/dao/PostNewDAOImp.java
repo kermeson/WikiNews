@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import projeto.model.ComentarioPostNew;
 import projeto.model.Usuario;
 
@@ -69,6 +70,32 @@ public class PostNewDAOImp implements PostNewDAO {
                 Usuario usuario = new Usuario(rs.getInt("idUsuario"), rs.getString("nome"),rs.getString("endereco"),rs.getString("email"), rs.getString("senha"));
                 list.add(new PostNew(rs.getInt("idPostNew"), usuario, rs.getString("titulo"), rs.getString("texto"), rs.getTimestamp("dataPublicacao")));
             }
+            return list;
+        } catch(SQLException sqle) {
+            throw new Exception("Erro: " + sqle.getMessage());
+        } finally {
+            ConnectionFactory.closeConnection(conn);
+        }
+    }
+    public List buscarPostNews(String textoBusca) throws Exception {
+        PreparedStatement ps = null;
+        Connection conn = null;
+        ResultSet rs = null;
+
+        try {
+            conn = this.conn;
+            String sql = "SELECT * FROM postnew, usuario WHERE postnew.idUsuario = usuario.idUsuario AND (" +
+                    "postnew.titulo LIKE ? OR postnew.texto LIKE ?)";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + textoBusca + "%");
+            ps.setString(2, "%" + textoBusca + "%");
+            rs = ps.executeQuery();
+            List<PostNew> list = new ArrayList<PostNew>();
+            while (rs.next()) {
+                Usuario usuario = new Usuario(rs.getInt("idUsuario"), rs.getString("nome"),rs.getString("endereco"),rs.getString("email"), rs.getString("senha"));
+                list.add(new PostNew(rs.getInt("idPostNew"), usuario, rs.getString("titulo"), rs.getString("texto"), rs.getTimestamp("dataPublicacao")));
+            }
+            System.out.print(list.size());
             return list;
         } catch(SQLException sqle) {
             throw new Exception("Erro: " + sqle.getMessage());

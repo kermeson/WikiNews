@@ -30,5 +30,7 @@ public interface PostNewDAO {
 
     public void adicionarComentario(ComentarioPostNew comentario) throws Exception;
 
+    public List buscarPostNews(String textoBusca) throws Exception;
+
 
 }

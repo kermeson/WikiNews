@@ -36,9 +36,12 @@
 
 
                 <div id="search">
-                    <form method="post" action="?" jsfc="h:form">
-                        <p><input type="text" jsfc="h:inputText" name="search" id="search" class="search" /> <input type="submit" value="Buscar" class="button" /></p>
-                       <rich:suggestionbox id="suggestionBoxId" for="search" suggestionAction="#{postnewC.complemento}"
+                    <form  jsfc="h:form">
+                        <div>
+                            <input type="text" jsfc="h:inputText" name="search" value="#{postnewC.textoBusca}" id="search" class="search" />
+                            <input type="submit" jsfc="h:commandButton" value="Buscar" class="button" action="#{postnewC.buscarPostNews}" />
+                        </div>
+                       <rich:suggestionbox id="suggestionBoxId" for="search" suggestionAction="#{mainC.complemento}"
                         width="200" height="150" var="result"  frequency="1"    minChars="3"  >
                             <h:column>
                                 <h:outputText value="#{result}"/>

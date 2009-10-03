@@ -5,6 +5,7 @@
  */
 package projeto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -157,6 +158,27 @@ public class MainController {
         System.out.println("lista");
         PostNewDAO dao = new PostNewDAOImp();
         return dao.buscarComentariosPostNew(postNew);
+    }
+
+    public List<String> complemento(Object event) throws Exception {
+        PostNewDAO dao = new PostNewDAOImp();
+        List lista = dao.buscarPostNews();
+        String prefixo = event.toString().toLowerCase();
+
+        List<String> retorno = new ArrayList();
+
+        for (int pos = 0; pos < lista.size(); pos++) {
+            PostNew p = (PostNew) lista.get(pos);
+
+            if (p.getTitulo().toLowerCase().startsWith(prefixo)) {
+                System.out.print(p.getTitulo());
+                retorno.add(p.getTitulo());
+            }
+
+        }
+
+        return retorno;
+
     }
  
 }

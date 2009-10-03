@@ -24,6 +24,17 @@ public class PostNewController {
     
 
     private PostNew postNew;
+    private String textoBusca;
+    private List<PostNew> listaPosts;
+
+
+    public List<PostNew> getListaPosts() {
+        return listaPosts;
+    }
+
+    public void setListaPosts(List<PostNew> listaPosts) {
+        this.listaPosts = listaPosts;
+    }
 
 
     /*
@@ -36,6 +47,17 @@ public class PostNewController {
         this.postNew = new PostNew();
         return "novo";
     }
+
+    public String getTextoBusca() {
+        return textoBusca;
+    }
+
+    public void setTextoBusca(String textoBusca) {
+        this.textoBusca = textoBusca;
+    }
+
+
+
 
     public PostNew getPostNew() {
         return postNew;
@@ -72,26 +94,13 @@ public class PostNewController {
         return dao.buscarPostNews();
     }
 
-    public List<String> getComplemento(Object event) throws Exception {
+    public String buscarPostNews() throws Exception {
         PostNewDAO dao = new PostNewDAOImp();
-        List lista = dao.buscarPostNews();
-        String prefixo = event.toString().toLowerCase();
-
-        List<String> retorno = new ArrayList();
-
-        for (int pos = 0; pos < lista.size(); pos++) {
-            PostNew p = (PostNew) lista.get(pos);
-            
-            if (p.getTitulo().toLowerCase().startsWith(prefixo)) {
-                System.out.print(p.getTitulo());
-                retorno.add(p.getTitulo());
-            }
-
-        }
-
-        return retorno;
-
+        System.out.print(getTextoBusca() + "sdfsf");
+        setListaPosts(dao.buscarPostNews(getTextoBusca()));
+        return "resultadoBusca";
     }
+
 
 
 

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                template="./templatemain.xhtml">
+    
+    <ui:define name="titulo">
+        Resultado Busca
+    </ui:define>
+
+    <ui:define name="conteudo">
+        <rich:panel id="ResultadoBusca">
+            <h3 class="titulos"><h:outputText value="Resultado da busca por: '#{postnewC.textoBusca}'" /></h3>
+            <form jsfc="h:form">
+                <ui:repeat value="#{postnewC.listaPosts}" var="item">
+                    <div class="left_articles">
+                        <h2 class="title">
+                            <h:commandLink action="#{mainC.ver}"  value="#{item.titulo}"><f:setPropertyActionListener value="#{item}"
+                        target="#{mainC.postNew}"/></h:commandLink></h2>
+                        <p class="date"><h:outputText value="publicado em &nbsp; #{item.dataPublicacao}"/><h:outputText value=" por #{item.usuario.nome}"/></p>
+                        <div><h:outputText value="#{item.texto}"/></div>
+
+                        <div class="clear"></div>
+                    </div>
+                </ui:repeat>
+            </form>
+        </rich:panel>
+    </ui:define>
+
+</ui:composition>

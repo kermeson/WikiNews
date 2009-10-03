@@ -7,17 +7,33 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
 
- <managed-bean>
-     <managed-bean-name>richFacesBean</managed-bean-name>
-     <managed-bean-class>org.my.richfaces.RichFacesBean</managed-bean-class>
-     <managed-bean-scope>session</managed-bean-scope>
-</managed-bean>
+    <managed-bean>
+        <managed-bean-name>richFacesBean</managed-bean-name>
+        <managed-bean-class>org.my.richfaces.RichFacesBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>mainC</managed-bean-name>
+        <managed-bean-class>projeto.controller.MainController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>postnewC</managed-bean-name>
+        <managed-bean-class>projeto.controller.PostNewController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>usuarioC</managed-bean-name>
+        <managed-bean-class>projeto.controller.UsuarioController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 
 
     <application>
         <view-handler>
             com.sun.facelets.FaceletViewHandler
-        </view-handler>    
+        </view-handler>
     </application>
     
     <lifecycle>
@@ -62,6 +78,10 @@
             <from-outcome>verPostNew</from-outcome>
             <to-view-id>/main/verPostNew.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>resultadoBusca</from-outcome>
+            <to-view-id>/main/resultadoBuscaPostNews.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/main/formPostNew.xhtml</from-view-id>
@@ -96,19 +116,6 @@
             <to-view-id>/formCadLogin.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    <managed-bean>
-        <managed-bean-name>mainC</managed-bean-name>
-        <managed-bean-class>projeto.controller.MainController</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>postnewC</managed-bean-name>
-        <managed-bean-class>projeto.controller.PostNewController</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>usuarioC</managed-bean-name>
-        <managed-bean-class>projeto.controller.UsuarioController</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
+
 </faces-config>
+
