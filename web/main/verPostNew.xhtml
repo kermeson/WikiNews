@@ -18,10 +18,25 @@
             <h3 class="titulopost"><h:outputText value="#{mainC.postNew.titulo}" /></h3>
             <p class="date"><h:outputText value="publicado em &nbsp; #{mainC.postNew.dataPublicacao}"/><h:outputText value=" por #{mainC.postNew.usuario.nome}"/></p>
             <div class="texto"><h:outputText value="#{mainC.postNew.texto}" /></div>
+            <rich:panel id="tags_postnew">
+                <form jsfc="h:form">
+                    <ui:repeat value="#{mainC.postNew.tags}" var="tag">
+                        <a jsfc="h:commandLink" title="#{tag.nome}" action="#{postnewC.buscarPostNewsPorTag}">
+                            <f:setPropertyActionListener value="#{tag}"  target="#{postnewC.tagBusca}"/>
+                            <h:outputText value="#{tag.nome}"/>
+                        </a>
+                        <h:outputText value=" " />
+                    </ui:repeat>
+                </form>
+            </rich:panel>
+            <form jsfc="h:form">
+                <input type="text" value="#{postnewC.tag.nome}" /><a4j:commandButton reRender="tags_postnew" type="submit" action="#{postnewC.adicionarTag}" value="Adicionar Tag" />
+            </form>
             <form jsfc="h:form">
                 <!--<a href="#" jsfc="h:commandLink" action="#{mainC.editar}" title="Editar"><f:param name="id" value="#{mainC.postNew.idPostNew}" />Editar</a>-->
                 <div><a4j:commandLink value="Adicionar Favorito" reRender="favoritos" action="#{mainC.adicionarFavorito}"></a4j:commandLink></div>
-            </form>           
+            </form>
+
         </rich:panel>
         <rich:panel id="listacomentarios" rendered="#{not empty mainC.comentariosPostNew}">
             <h3 class="titulopost">Comentários</h3>

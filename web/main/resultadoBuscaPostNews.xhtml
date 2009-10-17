@@ -15,7 +15,11 @@
 
     <ui:define name="conteudo">
         <rich:panel id="ResultadoBusca">
-            <h3 class="titulos"><h:outputText value="Resultado da busca por: '#{postnewC.textoBusca}'" /></h3>
+            <h3 class="titulos">
+                 <h:outputText value="Resultado da busca por:" />
+                 <h:outputText value="#{postnewC.textoBusca}" />
+                 <h:outputText value="#{postnewC.tagBusca.nome}" />
+            </h3>
             <form jsfc="h:form">
                 <ui:repeat value="#{postnewC.listaPosts}" var="item">
                     <div class="left_articles">
@@ -24,8 +28,14 @@
                         target="#{mainC.postNew}"/></h:commandLink></h2>
                         <p class="date"><h:outputText value="publicado em &nbsp; #{item.dataPublicacao}"/><h:outputText value=" por #{item.usuario.nome}"/></p>
                         <div><h:outputText value="#{item.texto}"/></div>
-
                         <div class="clear"></div>
+                        <ui:repeat value="#{item.tags}" var="tag">
+                            <a jsfc="h:commandLink" title="#{tag.nome}" action="#{postnewC.buscarPostNewsPorTag}">
+                                <f:setPropertyActionListener value="#{tag}"  target="#{postnewC.tagBusca}"/>
+                                <h:outputText value="#{tag.nome}"/>
+                            </a>
+                            <h:outputText value=" " />
+                        </ui:repeat>
                     </div>
                 </ui:repeat>
             </form>

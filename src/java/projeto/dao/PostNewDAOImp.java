@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import projeto.model.ComentarioPostNew;
+import projeto.model.Tag;
 import projeto.model.Usuario;
 
 /*
@@ -91,11 +92,67 @@ public class PostNewDAOImp implements PostNewDAO {
             ps.setString(2, "%" + textoBusca + "%");
             rs = ps.executeQuery();
             List<PostNew> list = new ArrayList<PostNew>();
+
             while (rs.next()) {
+                //Pegando as tags
+                String sql_tag = "SELECT * FROM relacao_postnew_tag, tag WHERE relacao_postnew_tag.idTag = tag.idTag AND " +
+                        "relacao_postnew_tag.idPostnew = ?";
+                PreparedStatement ps_tag = conn.prepareStatement(sql_tag);
+                ps_tag.setInt(1, rs.getInt("idPostNew"));
+                ResultSet rs_tag = ps_tag.executeQuery();
+
+                List<Tag> list_tags = new ArrayList<Tag>();
+                while (rs_tag.next()) {
+                    list_tags.add(new Tag(rs_tag.getInt("idTag"), rs_tag.getString("nome")));
+                }
+                //Pegando o autor
                 Usuario usuario = new Usuario(rs.getInt("idUsuario"), rs.getString("nome"),rs.getString("endereco"),rs.getString("email"), rs.getString("senha"));
-                list.add(new PostNew(rs.getInt("idPostNew"), usuario, rs.getString("titulo"), rs.getString("texto"), rs.getTimestamp("dataPublicacao")));
+                //Adicionando na lista de posts
+                list.add(new PostNew(rs.getInt("idPostNew"), usuario, rs.getString("titulo"), 
+                        rs.getString("texto"), rs.getTimestamp("dataPublicacao"),
+                        list_tags));
             }
-            System.out.print(list.size());
+            return list;
+        } catch(SQLException sqle) {
+            throw new Exception("Erro: " + sqle.getMessage());
+        } finally {
+            ConnectionFactory.closeConnection(conn);
+        }
+    }
+
+    public List buscarPostNews(Tag tag) throws Exception {
+        PreparedStatement ps = null;
+        Connection conn = null;
+        ResultSet rs = null;
+
+        try {
+            conn = this.conn;
+            String sql = "SELECT * FROM relacao_postnew_tag, postnew, usuario WHERE relacao_postnew_tag.idPostnew = postnew.idPostnew AND " +
+                    "postnew.idUsuario = usuario.idUsuario AND relacao_postnew_tag.idTag = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, tag.getIdTag());
+            rs = ps.executeQuery();
+            List<PostNew> list = new ArrayList<PostNew>();
+
+            while (rs.next()) {
+                //Pegando as tags
+                String sql_tag = "SELECT * FROM relacao_postnew_tag, tag WHERE relacao_postnew_tag.idTag = tag.idTag AND " +
+                        "relacao_postnew_tag.idPostnew = ?";
+                PreparedStatement ps_tag = conn.prepareStatement(sql_tag);
+                ps_tag.setInt(1, rs.getInt("idPostNew"));
+                ResultSet rs_tag = ps_tag.executeQuery();
+
+                List<Tag> list_tags = new ArrayList<Tag>();
+                while (rs_tag.next()) {
+                    list_tags.add(new Tag(rs_tag.getInt("idTag"), rs_tag.getString("nome")));
+                }
+                //Pegando o autor
+                Usuario usuario = new Usuario(rs.getInt("idUsuario"), rs.getString("nome"),rs.getString("endereco"),rs.getString("email"), rs.getString("senha"));
+                //Adicionando na lista de posts
+                list.add(new PostNew(rs.getInt("idPostNew"), usuario, rs.getString("titulo"),
+                        rs.getString("texto"), rs.getTimestamp("dataPublicacao"),
+                        list_tags));
+            }
             return list;
         } catch(SQLException sqle) {
             throw new Exception("Erro: " + sqle.getMessage());
@@ -118,8 +175,21 @@ public class PostNewDAOImp implements PostNewDAO {
             if (!rs.next()) {
                 throw new Exception("Não foi encontrado notícia com o código: " + idPostnew);
             }
+            //Pegando as tags
+            String sql_tag = "SELECT * FROM relacao_postnew_tag, tag WHERE relacao_postnew_tag.idTag = tag.idTag AND " +
+                    "relacao_postnew_tag.idPostnew = ?";
+            PreparedStatement ps_tag = conn.prepareStatement(sql_tag);
+            ps_tag.setInt(1, rs.getInt("idPostNew"));
+            ResultSet rs_tag = ps_tag.executeQuery();
+
+            List<Tag> list_tags = new ArrayList<Tag>();
+            while (rs_tag.next()) {
+                list_tags.add(new Tag(rs_tag.getInt("idTag"), rs_tag.getString("nome")));
+            }
+            // Pegando o autor
             Usuario usuario = new Usuario(rs.getInt("idUsuario"), rs.getString("nome"),rs.getString("endereco"),rs.getString("email"), rs.getString("senha"));
-            return new PostNew(rs.getInt("idPostNew"), usuario, rs.getString("titulo"), rs.getString("texto"), rs.getDate("dataPublicacao"));
+            return new PostNew(rs.getInt("idPostNew"), usuario, rs.getString("titulo"), 
+                    rs.getString("texto"), rs.getDate("dataPublicacao"),list_tags);
         } catch(SQLException sqle) {
             throw new Exception("Erro: " + sqle.getMessage());
         } finally {
@@ -203,9 +273,53 @@ public class PostNewDAOImp implements PostNewDAO {
             while (rs.next()) {
                 list.add(new ComentarioPostNew(rs.getInt("idComentario"), rs.getInt("idPostNew"), rs.getString("nome"), rs.getString("email"), rs.getString("comentario")));
             }
-            System.out.print(list.size());
             return list;
         } catch (SQLException sqle) {
+            throw new Exception("Erro: " + sqle.getMessage());
+        } finally {
+            ConnectionFactory.closeConnection(conn);
+        }
+    }
+
+    public void adicionarTag(PostNew postNew, Tag tag) throws Exception {
+        PreparedStatement ps = null;
+        Connection conn = null;
+        ResultSet rs = null;
+        if (postNew == null || tag == null) throw new Exception("Faltando parâmetros para adicionar Tag.");
+        try {
+            //Verificar se tag existe para poder criar uma nova tag
+            String sql = "SELECT * FROM realacao_postnew_tag WHERE nome = ?";
+            conn = this.conn;
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, tag.getNome());
+            rs = ps.executeQuery();
+
+            Tag tag_aux = null;
+            if (rs.next()) {
+                //Tag já existe
+                tag_aux = new Tag(rs.getInt("idTag"), rs.getString("nome"));
+            } else {
+                //Tag não existe, então vou criar uma nova
+                sql = "INSERT INTO tag SET nome = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, tag.getNome());
+                ps.executeUpdate();
+                //Buscando a tag inserida
+                sql = "SELECT * FROM tag ORDER BY idTag DESC LIMIT 1";
+                ps = conn.prepareStatement(sql);
+                rs = ps.executeQuery();
+                rs.first();
+                tag_aux = new Tag(rs.getInt("idTag"), rs.getString("nome"));
+            }
+
+            //Adicionando relacao postnew com a tag
+            sql = "INSERT INTO realacao_postnew_tag SET idPostnew = ?, idTag = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, postNew.getIdPostNew());
+            ps.setInt(2, tag_aux.getIdTag());
+            ps.executeUpdate();
+
+        } catch(SQLException sqle) {
             throw new Exception("Erro: " + sqle.getMessage());
         } finally {
             ConnectionFactory.closeConnection(conn);

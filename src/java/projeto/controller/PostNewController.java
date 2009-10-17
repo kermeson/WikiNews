@@ -14,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.servlet.http.HttpSession;
+import projeto.model.Tag;
 import projeto.model.Usuario;
 
 /**
@@ -25,6 +26,8 @@ public class PostNewController {
 
     private PostNew postNew;
     private String textoBusca;
+    private Tag tagBusca;
+    private Tag tag;
     private List<PostNew> listaPosts;
 
 
@@ -35,6 +38,23 @@ public class PostNewController {
     public void setListaPosts(List<PostNew> listaPosts) {
         this.listaPosts = listaPosts;
     }
+
+    public Tag getTagBusca() {
+        return tagBusca;
+    }
+
+    public void setTagBusca(Tag tagBusca) {
+        this.tagBusca = tagBusca;
+    }
+
+    public Tag getTag() {
+        return tag;
+    }
+
+    public void setTag(Tag tag) {
+        this.tag = tag;
+    }
+
 
 
     /*
@@ -85,7 +105,7 @@ public class PostNewController {
 
     public String excluir() throws Exception {
         PostNewDAO dao = new PostNewDAOImp();
-        dao.excluir(postNew);
+        dao.excluir(getPostNew());
         return "sucesso";
     }
 
@@ -96,11 +116,20 @@ public class PostNewController {
 
     public String buscarPostNews() throws Exception {
         PostNewDAO dao = new PostNewDAOImp();
-        System.out.print(getTextoBusca() + "sdfsf");
         setListaPosts(dao.buscarPostNews(getTextoBusca()));
         return "resultadoBusca";
     }
 
+    public String buscarPostNewsPorTag() throws Exception {
+        PostNewDAO dao = new PostNewDAOImp();
+        setListaPosts(dao.buscarPostNews(getTagBusca()));
+        return "resultadoBusca";
+    }
+
+    public void adicionarTag() throws Exception {
+        PostNewDAO dao = new PostNewDAOImp();
+        dao.adicionarTag(getPostNew(), getTag());
+    }
 
 
 

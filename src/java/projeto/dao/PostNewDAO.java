@@ -4,6 +4,7 @@ package projeto.dao;
 import projeto.model.PostNew;
 import java.util.List;
 import projeto.model.ComentarioPostNew;
+import projeto.model.Tag;
 
 /*
  * To change this template, choose Tools | Templates
@@ -31,6 +32,10 @@ public interface PostNewDAO {
     public void adicionarComentario(ComentarioPostNew comentario) throws Exception;
 
     public List buscarPostNews(String textoBusca) throws Exception;
+
+    public List buscarPostNews(Tag tag) throws Exception;
+
+    public void adicionarTag(PostNew postNew, Tag tag) throws Exception;;
 
 
 }

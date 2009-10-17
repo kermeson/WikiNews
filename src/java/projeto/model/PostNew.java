@@ -5,6 +5,7 @@
 package projeto.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -17,6 +18,7 @@ public class PostNew {
     private String titulo;
     private String texto;
     private Date dataPublicacao;
+    private List<Tag> tags;
 
     public PostNew(Integer idPostNew, Usuario usuario, String titulo, String texto,Date dataPublicacao) {
         this.idPostNew = idPostNew;
@@ -26,6 +28,16 @@ public class PostNew {
         this.dataPublicacao = dataPublicacao;
     }
 
+    public PostNew(Integer idPostNew, Usuario usuario, String titulo, String texto, Date dataPublicacao, List<Tag> tags) {
+        this.idPostNew = idPostNew;
+        this.usuario = usuario;
+        this.titulo = titulo;
+        this.texto = texto;
+        this.dataPublicacao = dataPublicacao;
+        this.tags = tags;
+    }
+
+    
     public PostNew() {}
 
 
@@ -89,4 +101,14 @@ public class PostNew {
     public void setDataPublicacao(Date dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
     }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    
 }
