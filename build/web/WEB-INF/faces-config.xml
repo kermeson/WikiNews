@@ -28,7 +28,11 @@
         <managed-bean-class>projeto.controller.UsuarioController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
-
+    <managed-bean>
+        <managed-bean-name>leitorC</managed-bean-name>
+        <managed-bean-class>projeto.controller.LeitorController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 
     <application>
         <view-handler>
@@ -114,6 +118,21 @@
         <navigation-case>
             <from-outcome>sucesso</from-outcome>
             <to-view-id>/formCadLogin.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>verPostNew</from-outcome>
+            <to-view-id>/verPostNew.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/verPostNew.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>voltarPostNew</from-outcome>
+            <to-view-id>/template.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 

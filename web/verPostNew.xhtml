@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -26,16 +27,10 @@
 		<div id="logo">
             <img src="images/logo.png" alt="Logo" />
         </div>
-        <div id="barratopo">
-            <ul id="tablist">
-                <li><a href="#">News</a></li>
-                <li><a href="#">Blogs</a></li>
-                <li><a href="#">Photos</a></li>
-                <li><a href="#">Profiles</a></li>
-                <li><a href="#">Feeds</a></li>
-                <li><a href="#">Broadcast News</a></li>
-            </ul>
-        </div>
+
+		<ul id="tablist">
+			<li><a class="current" href="#" accesskey="n"><span class="key">N</span>ews</a></li><li><a href="#" accesskey="b"><span class="key">B</span>logs</a></li><li><a href="#" accesskey="p"><span class="key">P</span>hotos</a></li><li><a href="#" accesskey="r">P<span class="key">r</span>ofiles</a></li><li><a href="#" accesskey="f"><span class="key">F</span>eeds</a></li><li><a href="#" accesskey="o">Br<span class="key">o</span>adcast News</a></li>
+		</ul>
 
 		<div id="topics">
 			<div class="thirds">
@@ -63,23 +58,12 @@
 		</div>
 
 		<div id="left">
-            <h:form>
-            <ui:insert name="conteudo">
-                <ui:repeat value="#{leitorC.todos}" var="item">
-                    <div class="left_articles">
-                        <h2 class="title">
-                           <h:commandLink action="#{leitorC.verPostNew}" value="#{item.titulo}">
-                               <f:setPropertyActionListener value="#{item}"  target="#{mainC.postNew}"/>
-                           </h:commandLink>
-                        </h2>
-                        <p class="date"><h:outputText value="publicado em &nbsp; #{item.dataPublicacao}"/><h:outputText value=" por #{item.usuario.nome}"/></p>
-                        <div><h:outputText value="#{item.texto}"/></div>
-                        <div class="clear"></div>
-                    </div>
-                 </ui:repeat>
-            </ui:insert>
-            </h:form>
-		</div>
+            <h3><h:outputText value="#{mainC.postNew.titulo}" /></h3>
+            <div class="texto"><h:outputText value="#{mainC.postNew.texto}" /></div>
+            <form jsfc="h:form">
+                <h:commandLink action="#{leitorC.voltarPostNew}" value="Voltar"></h:commandLink>
+            </form>
+        </div>
 
 		<div id="right">
 			<div class="right_articles">
