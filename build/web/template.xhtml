@@ -2,7 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+      template="./templatemain.xhtml">
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="author" content="Luka Cvrk (www.solucija.com)" />
@@ -23,10 +26,16 @@
 		<div id="logo">
             <img src="images/logo.png" alt="Logo" />
         </div>
-
-		<ul id="tablist">
-			<li><a class="current" href="#" accesskey="n"><span class="key">N</span>ews</a></li><li><a href="#" accesskey="b"><span class="key">B</span>logs</a></li><li><a href="#" accesskey="p"><span class="key">P</span>hotos</a></li><li><a href="#" accesskey="r">P<span class="key">r</span>ofiles</a></li><li><a href="#" accesskey="f"><span class="key">F</span>eeds</a></li><li><a href="#" accesskey="o">Br<span class="key">o</span>adcast News</a></li>
-		</ul>
+        <div id="barratopo">
+            <ul id="tablist">
+                <li><a href="#">News</a></li>
+                <li><a href="#">Blogs</a></li>
+                <li><a href="#">Photos</a></li>
+                <li><a href="#">Profiles</a></li>
+                <li><a href="#">Feeds</a></li>
+                <li><a href="#">Broadcast News</a></li>
+            </ul>
+        </div>
 
 		<div id="topics">
 			<div class="thirds">
@@ -54,6 +63,7 @@
 		</div>
 
 		<div id="left">
+            <h:form>
             <ui:insert name="conteudo">
                 <ui:repeat value="#{leitorC.todos}" var="item">
                     <div class="left_articles">
@@ -68,28 +78,7 @@
                     </div>
                  </ui:repeat>
             </ui:insert>
-			<!--<div class="subheader">
-				<p><a href="#">Lorem ipsum dolor</a> sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex.</p>
-			</div>
-			<div class="left_articles">
-				<h2>Today's Featured Article</h2>
-				<p class="date">Posted on 8th September</p>
-				<img class="bigimage" src="images/bigimage.gif" alt="Big Image" />
-				<p><a href="#">Lorem ipsum dolor sit amet</a>, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. <a href="#">Ut wisi enim ad minim veniam</a>, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex.</p>
-				<p><a href="#">Lorem ipsum dolor sit amet</a>, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. <a href="#">Ut wisi enim ad minim veniam</a>, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex.</p>
-			</div>
-			<div class="left_box">
-				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore.</p>
-			</div>
-			<div class="thirds">
-				<p><b><a href="#" class="title">Web 2.0 business startup tips</a></b><br />Lorem ipsum dolor sit amet esta pa, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci. <a href="#"><img src="images/comment.gif" alt="Comment" /></a></p>
-			</div>
-			<div class="thirds">
-				<p><b><a href="http://andreasviklund.com/templates/" class="title">Visualize your website</a></b><br />Lorem ipsum dolor sit amet esta pa, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci. <a href="#"><img src="images/comment.gif" alt="Comment" /></a></p>
-			</div>
-			<div class="thirds">
-				<p><b><a href="http://snews.solucija.com/" class="title">Manage your content</a></b><br />Lorem ipsum dolor sit amet esta pa, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci. <a href="#"><img src="images/comment.gif" alt="Comment" /></a></p>
-			</div>-->
+            </h:form>
 		</div>
 
 		<div id="right">
